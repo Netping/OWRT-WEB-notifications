@@ -1,0 +1,81 @@
+<%+owrt_web_notification/ui_util/utils.js%>
+<%+owrt_web_notification/ui_util/external.js%>
+<%+owrt_web_notification/ui_widget/UIEventBus.js%>
+<%+owrt_web_notification/ui_override/TextFieldStyled.js%>
+<%+owrt_web_notification/notify.js%>
+<%+owrt_web_notification/modal_notify%>
+<%+owrt_web_notification/css%>
+
+<%
+	local notify = require "luci.model.owrt_web_notification.notify"
+
+	local config = "notifyconf"
+	local uci = require "luci.model.uci".cursor()
+	local util = require "luci.util"
+
+	-- make notifications table for html rendering
+	local notifications = {}
+	function withEveryNotify(n)
+		if (n[".name"] ~= "prototype") then
+			notifications[n[".name"]] = n
+		end
+	end
+	uci:foreach(config, "notify", withEveryNotify)
+
+	local i = 1
+%> 
+<div id="view">
+	<h2 name="content">Управление уведомлениями</h2>
+	<div class="cbi-map-descr">В данной таблице приведены настроенные уведомления. Здесь Вы можете добавить, настроить или удалить уведомления.</div>
+	<input type="button" class="cbi-button cbi-button-apply" style="margin-bottom: 1em;"
+		onclick="add_notify(this)"
+		value="Добавить уведомление"/>
+	<div class="table">
+		<div class="tr table-titles">
+			<div class="th" style="width: 100%;">Имя уведомления</div>
+			<div class="th">Сигнал</div>
+			<div class="th">Метод</div>
+			<div class="th">Состояние</div>
+			<div class="th">Управление</div>
+		</div>
+		<% for k, v in util.kspairs(notifications) do %>
+			<div class="tr cbi-rowstyle-<%=i%>">
+				<div class="td" data-title="Имя уведомления" style="text-align: left;">
+					<input type="text"
+						onchange="rename_notify(this)"
+						name="notify_name"
+						value="<%= notify(k):render('name') %>"
+						data-notify="<%=k%>"/>
+					<script type="text/javascript">L.require('menu-bootstrap')</script>
+					<div id="<%=k%>" class="cbi-tooltip error" style="display: none;">▲ Уведомление стаким именем уже существует!</div>
+				</div>
+				<div class="td" data-title="Сигнал">
+					<%= notify(k):render("event") %>
+				</div>
+				<div class="td" data-title="Метод">
+					<%= notify(k):render("method") %>
+				</div>
+				<div class="td" data-title="Состояние">
+					<%= notify(k):render("state") %>
+				</div>
+				<div class="nowrap cbi-section-actions td">
+					<input type="button" class="cbi-button cbi-button-apply" onclick="switch_notify(this)"
+						value="Вкл/Выкл"
+						data-notify="<%=k%>" 
+						style="display: initial;" />
+					<input type="button" class="cbi-button cbi-button-apply" onclick="edit_notify(this)"
+						value="Настройки"
+						data-action="edit"
+						data-notify="<%=k%>" 
+						style="display: initial;" />
+					<input type="button" class="cbi-button cbi-button-reset" onclick="delete_notify(this)"
+						value="Удалить"
+						data-notify="<%=k%>"
+						style="display: initial;" />
+				</div>
+			</div>
+			<% i = (i%2) + 1 %>
+		<% end%>
+	</div>
+</div>
+<span id="btn_enable_spinner" class="btn_spinner"></span>

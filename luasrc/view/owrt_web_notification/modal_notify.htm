@@ -1,0 +1,163 @@
+<%
+	local config = "notifyconf"
+	local uci = require "luci.model.uci".cursor()
+	local util = require "luci.util"
+	local log = require "luci.model.netping.log"
+	local globals = uci:get_all(config, "globals")
+%>
+<%
+	local notify_list = require "luci.model.owrt_web_notification.notify_list"
+	local dropdown, dropdown_js, name = {}, '', ''
+	for ntftype, ntf in pairs(notify_list) do
+		print(ntf():render("cssfile"))
+		print(ntf():render("validator"))
+		print(ntf():render("widgetfile"))
+		dropdown[#dropdown+1] = string.format('"%s": "%s"', ntf():getName(), ntf():getLabel())
+	end
+	dropdown_js = "{" .. table.concat(dropdown, ", ") .. "}"
+
+	local dropdown_signal = {}
+	for signal_index, signal_name in pairs(globals['event']) do
+		s_name, s_label = signal_name:match"([^.]*).(.*)"
+		dropdown_signal[#dropdown_signal + 1] = string.format('"%s": "%s"', s_name, s_label)
+	end
+	dropdown_signal_js = "{" .. table.concat(dropdown_signal, ", ") .. "}"
+%>
+
+<%+owrt_web_notification/ui_override/DropdownMethod.js%>
+
+<script type="text/javascript">
+//<![CDATA[
+
+function widgetPopulation(uci_section, uci) {
+	var section = uci.get("<%=config%>", uci_section) || [];
+	return function(uci_option) {
+		var population = {}
+		if (section[uci_option]) {
+			section[uci_option].forEach(function(p) {
+				population[p.split(".")[0]] = p.split(".")[1];
+			})
+		}
+		return population
+	}
+}
+
+function edit_notify(btn) {
+	var globals_data = {}
+	var notify_id = btn.getAttribute("data-notify") || null;
+	L.require("ui").then(function(ui){
+		L.require("uci").then(function(uci) {
+			uci.load("<%=config%>").then(function(out){
+				globals_data = uci.get("<%=config%>", "globals");
+				var globals = widgetPopulation("globals", uci),
+					notify_data = uci.get("<%=config%>", notify_id),
+					ntf_data = {};
+
+				var index = notify_data[".index"]
+
+				var method = new ui.DropdownMethod(notify_data["method"], <%= dropdown_js %>, { 
+					sort: true
+				});
+
+				var signal = new ui.Dropdown(notify_data["event"], <%= dropdown_signal_js %>, { 
+					sort: true
+				});
+
+				// NOTIFY INITS
+				<%
+					for ntftype, ntf in pairs(notify_list) do
+						print(ntf():render("jsinit"))
+					end
+				%>
+
+				var name = new ui.Textfield(notify_data["name"], {
+					datatype: "rangelength(4,128)" });
+
+				L.showModal('Редактировать уведомление', [
+					E('div', { class: 'cbi-map' }, [
+						E('div', { class: 'cbi-map-section' }, [
+							E('div', { class: 'cbi-map-section-node' }, [
+								E('div', { class: 'cbi-value' }, [
+									E('label', { 'class': 'cbi-value-title memo-edit' }, _('Имя уведомления') + ":"),
+									E('div', { class: 'cbi-value-field memo-edit' }, [
+										name.render()
+									])
+								]),
+								E('div', { class: 'cbi-value' }, [
+									E('label', { 'class': 'cbi-value-title' }, _('Сигнал') + ":"),
+									E('div', { class: 'cbi-value-field' }, [
+										E('div', { class: 'cbi-value-field-flex'}, [
+											E('div', { class: 'cbi-value-field-1col'}, [
+												signal.render()
+											]),
+										]),
+									]),
+								]),
+								E('div', { class: 'cbi-value' }, [
+									E('label', { 'class': 'cbi-value-title' }, _('Способ отправки') + ":"),
+									E('div', { class: 'cbi-value-field' }, [
+										E('div', { class: 'cbi-value-field-flex'}, [
+											E('div', { class: 'cbi-value-field-1col'}, [
+												method.render()
+											]),
+											E('div', { class: 'cbi-value-field-2col'}, [
+												// NOTIFY WIDGETS RENDER
+												<%
+													for ntftype, ntf in pairs(notify_list) do
+														print(ntf():render("jsrender") .. ",\n")
+													end
+												%>
+											])
+										])
+									])
+								]),
+							])
+						])
+					]),
+
+					E('div', { class: 'cbi-value-field' }, [
+						E('div', { 
+							class: 'btn', 
+							click: function() { L.hideModal() }
+						}, _('Закрыть')),
+						' ',
+						E('div', { class: 'btn success', "name": "apply",
+							'click': ui.createHandlerFn(this, function() {
+								<%
+									for ntftype, ntf in pairs(notify_list) do
+										print('ntf_data[' .. ntftype .. '.method] = ' .. ntf():render("getvalues"))
+										-- print('ntf_widgets[' .. ntftype .. '.method] = ' .. ntf():render("getfields"))
+									end
+								%>
+
+								// Remove inactive notify's data
+								for(type in ntf_data) {
+									if(type != method.getValue()) {
+										delete ntf_data[type]
+										//delete ntf_widgets[name]
+									}
+								}
+
+								notify_data = uci.get("<%=config%>", 'prototype')
+								notify_data[".name"] = notify_id
+								notify_data[".type"] = 'notify'
+								notify_data[".index"] = index
+								notify_data["name"] = name.getValue()
+								notify_data["method"] = method.getValue()
+								notify_data["event"] = signal.getValue()
+								notify_data = Object.assign(notify_data, ntf_data[method.getValue()]);
+								return handleEdit(notify_id, notify_data, globals_data, ntf_data);
+							})
+						}, _('Сохранить'))
+					])
+				]);
+			})
+		})
+	})
+}
+
+function handleEdit(notify_id, notify_data, globals_data, ntf_data) {
+	send_action("edit", notify_id, { "notify_data": notify_data, "globals_data": globals_data, "ntf_data": ntf_data } )
+}
+//]]>
+</script>

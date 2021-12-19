@@ -72,7 +72,6 @@ end
 
 
 function email:getLabel()
-	-- return notify_section:upper()
 	return notify_section
 end
 

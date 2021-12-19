@@ -11,20 +11,20 @@ L.require('ui').then(function(ui) {
 			var UIEventBus = ui.AbstractElement.extend(/** @lends LuCI.ui.Textarea.prototype */ {
 				__init__: function() {
 					this.timeframe = {
-						"po_nocham": {
+						"zapretit_uvedomleniya": {
 							enabled: true,
-							title: "По ночам",
-							dates: ["2020-12-10", "2020-12-12"],
-							timeranges: ["8.5,16", "22,7", "12,20"],
-							repeat_mode: ["Ежегодно"]
+							title: "Запретить уведомления",
+							dates: [],
+							timeranges: [],
+							// repeat_mode: ["Ежегодно"]
 						},
-						"po_dnyam_mesyaca": {
-							enabled: true,
-							title: "По дням месяца",
-							dates: ["2020-12-15", "2020-12-16", "2020-12-17", "2020-12-18"],
-							timeranges: ["21,6.75"],
-							repeat_mode: ["Ежемесячно"]
-						}
+//						"po_dnyam_mesyaca": {
+//							enabled: true,
+//							title: "По дням месяца",
+//							dates: ["2020-12-15", "2020-12-16", "2020-12-17", "2020-12-18"],
+//							timeranges: ["21,6.75"],
+//							repeat_mode: ["Ежемесячно"]
+//						}
 					}
 				},
 				/*** Example of data structure
@@ -93,7 +93,7 @@ L.require('ui').then(function(ui) {
 						return;
 					}
 					this.timeframe[tab_id]["repeat_mode"] = []
-					this.node.dispatchEvent(new CustomEvent("bus-every-period-changed", {}));	
+					this.node.dispatchEvent(new CustomEvent("bus-every-period-changed", {}));
 				},
 
 				addDates: function(tab_id="", tab_title="", dates=[]) {
@@ -177,6 +177,7 @@ L.require('ui').then(function(ui) {
 			});
 			ui["EventBus"] = UIEventBus;
 			window.EventBus = new ui.EventBus()
+			console.log(window.EventBus);
 			var EventBus_pseudo_widget = window.EventBus.render()
 		});
 	});

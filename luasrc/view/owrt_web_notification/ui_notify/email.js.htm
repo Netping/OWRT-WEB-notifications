@@ -29,13 +29,15 @@ L.require('ui').then(function(ui) {
 							}),
 
 							"sendto": new ui.TextFieldStyled(section["sendto"], { 
-								datatype: "rangelength(2,255)",
-								//htmlStyle: "width: 60px"
+								datatype: "rangelength(2,255)"
 							}),
 
 							"expression": new ui.TextFieldStyled(section["expression"], { 
-								datatype: "rangelength(2,128)",
-								//htmlStyle: "width: 60px"
+								datatype: "rangelength(2,128)"
+							}),
+
+							"timetable": new ui.TextFieldStyled(section["timetable"], { 
+								datatype: "rangelength(2,128)"
 							}),
 
 						}
@@ -68,11 +70,17 @@ L.require('ui').then(function(ui) {
 									this.fields['expression'].render()
 								])
 							]),
+							E('div', {class: 'tr cbi-rowstyle-1'}, [
+								E('div', {class: 'td'}, "Время исполнения"),
+								E('div', {class: 'td timetable', style: "text-align: right;"}, [
+							//		E('div', {class: 'btn timetable', onclick: "edit_alert(this)"}, _('Настроить')),
+									this.fields['timetable'].render()
+								])
+							]),
 						])
 						
 						return this.bind(container);
 					},
-
 
 					/** @private */
 					bind: function(container) {

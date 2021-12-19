@@ -1,9 +1,12 @@
 <%+owrt_web_notification/ui_util/utils.js%>
 <%+owrt_web_notification/ui_util/external.js%>
 <%+owrt_web_notification/ui_widget/UIEventBus.js%>
+<%+owrt_web_notification/ui_widget/UINotesBanner.js%>
+<%+owrt_web_notification/ui_widget/UIRangeSlider.js%>
 <%+owrt_web_notification/ui_override/TextFieldStyled.js%>
 <%+owrt_web_notification/notify.js%>
 <%+owrt_web_notification/modal_notify%>
+<!--%+owrt_web_notification/_modal_alert_section_intervals.js%-->
 <%+owrt_web_notification/css%>
 
 <%
@@ -23,7 +26,7 @@
 	uci:foreach(config, "notify", withEveryNotify)
 
 	local i = 1
-%> 
+%>
 <div id="view">
 	<h2 name="content">Управление уведомлениями</h2>
 	<div class="cbi-map-descr">В данной таблице приведены настроенные уведомления. Здесь Вы можете добавить, настроить или удалить уведомления.</div>

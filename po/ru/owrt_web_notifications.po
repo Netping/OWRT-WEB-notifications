@@ -1,0 +1,120 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Project-Id-Version: \n"
+"Last-Translator: NetPing\n"
+"Language-Team: none\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"X-Generator: Poedit 3.0\n"
+
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: luasrc/view/owrt_web_notification/notify.js.htm:120
+msgid "Loading"
+msgstr "Загрузка"
+
+#: luasrc/view/owrt_web_notification/notify_list.htm:35
+msgid "ntf_add_button"
+msgstr "Добавить уведомление"
+
+#: luasrc/view/owrt_web_notification/notify_list.htm:75
+msgid "ntf_delete_button"
+msgstr "Удалить"
+
+#: luasrc/view/owrt_web_notification/modal_notify.htm:617
+msgid "ntf_edit_notify_title"
+msgstr "Редактировать уведомление"
+
+#: luasrc/view/owrt_web_notification/notify_list.htm:53
+msgid "ntf_name_validate"
+msgstr "▲ Уведомление стаким именем уже существует!"
+
+#: luasrc/view/owrt_web_notification/notify_list.htm:32
+msgid "ntf_page_description"
+msgstr "В данной таблице приведены настроенные уведомления. Здесь Вы можете добавить, настроить или удалить уведомления."
+
+#: luasrc/view/owrt_web_notification/notify_list.htm:31
+msgid "ntf_page_title"
+msgstr "Управление уведомлениями"
+
+#: luasrc/view/owrt_web_notification/notify_list.htm:70
+msgid "ntf_settings_button"
+msgstr "Настройки"
+
+#: luasrc/view/owrt_web_notification/notify_list.htm:66
+msgid "ntf_switch_button"
+msgstr "Вкл/Выкл"
+
+#: luasrc/controller/owrt_web_notification/index.lua:21
+msgid "ntf_tab"
+msgstr "Уведомления"
+
+#: luasrc/view/owrt_web_notification/notify_list.htm:42
+msgid "ntf_th_control"
+msgstr "Управление"
+
+#: luasrc/view/owrt_web_notification/notify_list.htm:40
+msgid "ntf_th_method"
+msgstr "Метод"
+
+#: luasrc/view/owrt_web_notification/notify_list.htm:38
+msgid "ntf_th_name"
+msgstr "Имя уведомления"
+
+#: luasrc/view/owrt_web_notification/notify_list.htm:39
+msgid "ntf_th_signal"
+msgstr "Сигнал"
+
+#: luasrc/view/owrt_web_notification/notify_list.htm:41
+msgid "ntf_th_state"
+msgstr "Состояние"
+
+#: luasrc/view/owrt_web_notification/ui_notify/email.js.htm:52
+msgid "ntf_params"
+msgstr "Параметры уведомления "
+
+#: luasrc/view/owrt_web_notification/ui_notify/email.js.htm:53
+msgid "ntf_params_values"
+msgstr "Значение"
+
+#: luasrc/view/owrt_web_notification/ui_notify/email.js.htm:56
+msgid "ntf_text"
+msgstr "Текст уведомления"
+
+#: luasrc/view/owrt_web_notification/ui_notify/email.js.htm:62
+msgid "ntf_sendto"
+msgstr "Отправить на адреса"
+
+#: luasrc/view/owrt_web_notification/ui_notify/email.js.htm:68
+msgid "ntf_expression"
+msgstr "Условие"
+
+#: luasrc/view/owrt_web_notification/ui_notify/email.js.htm:74
+msgid "ntf_timetable"
+msgstr "Время исполнения"
+
+#: luasrc/view/owrt_web_notification/modal_notify.htm:622
+msgid "ntf_name"
+msgstr "Имя уведомления"
+
+#: luasrc/view/owrt_web_notification/modal_notify.htm:628
+msgid "ntf_signal"
+msgstr "Сигнал"
+
+#: luasrc/view/owrt_web_notification/modal_notify.htm:638
+msgid "ntf_method"
+msgstr "Способ отправки"
+
+#: luasrc/view/owrt_web_notification/modal_notify.htm:678
+msgid "ntf_close"
+msgstr "Закрыть"
+
+#: luasrc/view/owrt_web_notification/modal_notify.htm:709
+msgid "ntf_save"
+msgstr "Сохранить"

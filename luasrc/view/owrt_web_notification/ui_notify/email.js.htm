@@ -49,29 +49,29 @@ L.require('ui').then(function(ui) {
 						var classActive = (this.isActive) ? ' active' : ''
 						var container = E('div', { class: 'table modal-section-param ntf email' + classActive}, [
 							E('div', {class: 'tr table-titles'}, [
-								E('div', {class: 'th', style: 'width: 100%'}, _("Параметры уведомления " + this.method)),
-								E('div', {class: 'th', style: "text-align: right;"}, _("Значение")),
+								E('div', {class: 'th', style: 'width: 100%'}, _("ntf_params") + this.method),
+								E('div', {class: 'th', style: "text-align: right;"}, _("ntf_params_values")),
 							]),
 							E('div', {class: 'tr cbi-rowstyle-1'}, [
-								E('div', {class: 'td'}, "Текст уведомления"),
+								E('div', {class: 'td'}, _("ntf_text")),
 								E('div', {class: 'td', style: "text-align: right;"}, [
 									this.fields['text'].render()
 								])
 							]),
 							E('div', {class: 'tr cbi-rowstyle-1'}, [
-								E('div', {class: 'td'}, "Отправить на адреса"),
+								E('div', {class: 'td'}, _("ntf_sendto")),
 								E('div', {class: 'td', style: "text-align: right;"}, [
 									this.fields['sendto'].render()
 								])
 							]),
 							E('div', {class: 'tr cbi-rowstyle-1'}, [
-								E('div', {class: 'td'}, "Условие"),
+								E('div', {class: 'td'}, _("ntf_expression")),
 								E('div', {class: 'td', style: "text-align: right;"}, [
 									this.fields['expression'].render()
 								])
 							]),
 							E('div', {class: 'tr cbi-rowstyle-1'}, [
-								E('div', {class: 'td'}, "Время исполнения"),
+								E('div', {class: 'td'}, _("ntf_timetable")),
 								E('div', {class: 'td timetable', style: "text-align: right;"}, [
 							//		E('div', {class: 'btn timetable', onclick: "edit_alert(this)"}, _('Настроить')),
 									this.fields['timetable'].render()

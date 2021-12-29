@@ -1,0 +1,120 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Project-Id-Version: \n"
+"Last-Translator: NetPing\n"
+"Language-Team: none\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"X-Generator: Poedit 3.0\n"
+
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: luasrc/view/owrt_web_notification/notify.js.htm:120
+msgid "Loading"
+msgstr "Loading"
+
+#: luasrc/view/owrt_web_notification/notify_list.htm:35
+msgid "ntf_add_button"
+msgstr "Add notification"
+
+#: luasrc/view/owrt_web_notification/notify_list.htm:75
+msgid "ntf_delete_button"
+msgstr "Remove"
+
+#: luasrc/view/owrt_web_notification/modal_notify.htm:617
+msgid "ntf_edit_notify_title"
+msgstr "Edit notofication"
+
+#: luasrc/view/owrt_web_notification/notify_list.htm:53
+msgid "ntf_name_validate"
+msgstr "▲ Notification with stack name already exists!"
+
+#: luasrc/view/owrt_web_notification/notify_list.htm:32
+msgid "ntf_page_description"
+msgstr "This table lists the configured notifications. Here you can add, configure or remove notifications."
+
+#: luasrc/view/owrt_web_notification/notify_list.htm:31
+msgid "ntf_page_title"
+msgstr "Manage notifications"
+
+#: luasrc/view/owrt_web_notification/notify_list.htm:70
+msgid "ntf_settings_button"
+msgstr "Settings"
+
+#: luasrc/view/owrt_web_notification/notify_list.htm:66
+msgid "ntf_switch_button"
+msgstr "Switch on/off"
+
+#: luasrc/controller/owrt_web_notification/index.lua:21
+msgid "ntf_tab"
+msgstr "Notifications"
+
+#: luasrc/view/owrt_web_notification/notify_list.htm:42
+msgid "ntf_th_control"
+msgstr "Control"
+
+#: luasrc/view/owrt_web_notification/notify_list.htm:40
+msgid "ntf_th_method"
+msgstr "Method"
+
+#: luasrc/view/owrt_web_notification/notify_list.htm:38
+msgid "ntf_th_name"
+msgstr "Name"
+
+#: luasrc/view/owrt_web_notification/notify_list.htm:39
+msgid "ntf_th_signal"
+msgstr "Signal"
+
+#: luasrc/view/owrt_web_notification/notify_list.htm:41
+msgid "ntf_th_state"
+msgstr "State"
+
+#: luasrc/view/owrt_web_notification/ui_notify/email.js.htm:52
+msgid "ntf_params"
+msgstr "Notification's params "
+
+#: luasrc/view/owrt_web_notification/ui_notify/email.js.htm:53
+msgid "ntf_params_values"
+msgstr "Values"
+
+#: luasrc/view/owrt_web_notification/ui_notify/email.js.htm:56
+msgid "ntf_text"
+msgstr "Notification text"
+
+#: luasrc/view/owrt_web_notification/ui_notify/email.js.htm:62
+msgid "ntf_sendto"
+msgstr "Send to"
+
+#: luasrc/view/owrt_web_notification/ui_notify/email.js.htm:68
+msgid "ntf_expression"
+msgstr "Condition"
+
+#: luasrc/view/owrt_web_notification/ui_notify/email.js.htm:74
+msgid "ntf_timetable"
+msgstr "Active time"
+
+#: luasrc/view/owrt_web_notification/modal_notify.htm:622
+msgid "ntf_name"
+msgstr "Notification name"
+
+#: luasrc/view/owrt_web_notification/modal_notify.htm:628
+msgid "ntf_signal"
+msgstr "Signal"
+
+#: luasrc/view/owrt_web_notification/modal_notify.htm:638
+msgid "ntf_method"
+msgstr "Send method"
+
+#: luasrc/view/owrt_web_notification/modal_notify.htm:678
+msgid "ntf_close"
+msgstr "Close"
+
+#: luasrc/view/owrt_web_notification/modal_notify.htm:709
+msgid "ntf_save"
+msgstr "Save"

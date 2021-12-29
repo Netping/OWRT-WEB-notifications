@@ -614,18 +614,18 @@ function makeSliderWidget(tab_idref, tab_title, initVal=[]) {
 				var name = new ui.Textfield(notify_data["name"], {
 					datatype: "rangelength(4,128)" });
 
-				L.showModal('Редактировать уведомление', [
+				L.showModal('<%:ntf_edit_notify_title%>', [
 					E('div', { class: 'cbi-map' }, [
 						E('div', { class: 'cbi-map-section' }, [
 							E('div', { class: 'cbi-map-section-node' }, [
 								E('div', { class: 'cbi-value' }, [
-									E('label', { 'class': 'cbi-value-title memo-edit' }, _('Имя уведомления') + ":"),
+									E('label', { 'class': 'cbi-value-title memo-edit' }, _("ntf_name") + ":"),
 									E('div', { class: 'cbi-value-field memo-edit' }, [
 										name.render()
 									])
 								]),
 								E('div', { class: 'cbi-value' }, [
-									E('label', { 'class': 'cbi-value-title' }, _('Сигнал') + ":"),
+									E('label', { 'class': 'cbi-value-title' }, _("ntf_signal") + ":"),
 									E('div', { class: 'cbi-value-field' }, [
 										E('div', { class: 'cbi-value-field-flex'}, [
 											E('div', { class: 'cbi-value-field-1col'}, [
@@ -635,7 +635,7 @@ function makeSliderWidget(tab_idref, tab_title, initVal=[]) {
 									]),
 								]),
 								E('div', { class: 'cbi-value' }, [
-									E('label', { 'class': 'cbi-value-title' }, _('Способ отправки') + ":"),
+									E('label', { 'class': 'cbi-value-title' }, _("ntf_method") + ":"),
 									E('div', { class: 'cbi-value-field' }, [
 										E('div', { class: 'cbi-value-field-flex'}, [
 											E('div', { class: 'cbi-value-field-1col'}, [
@@ -673,9 +673,9 @@ function makeSliderWidget(tab_idref, tab_title, initVal=[]) {
 
 					E('div', { class: 'cbi-value-field' }, [
 						E('div', { 
-							class: 'btn', 
+							class: 'btn',
 							click: function() { L.hideModal() }
-						}, _('Закрыть')),
+						}, _("ntf_close")),
 						' ',
 						E('div', { class: 'btn success', "name": "apply",
 							'click': ui.createHandlerFn(this, function() {
@@ -706,7 +706,7 @@ function makeSliderWidget(tab_idref, tab_title, initVal=[]) {
 								notify_data = Object.assign(notify_data, ntf_data[method.getValue()]);
 								return handleEdit(notify_id, notify_data, globals_data, ntf_data);
 							})
-						}, _('Сохранить'))
+						}, _("ntf_save"))
 					])
 				]);
 			})

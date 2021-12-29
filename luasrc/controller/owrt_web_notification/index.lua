@@ -18,7 +18,7 @@ end
 
 function index()
 	if nixio.fs.access("/etc/config/notifyconf") then
-		entry({"admin", "system", "notify"}, cbi("owrt_web_notification/cbi_notify"), "Уведомления", 30)
+		entry({"admin", "system", "notify"}, cbi("owrt_web_notification/cbi_notify"), translate("ntf_tab"), 30)
 		entry({"admin", "system", "notify", "action"}, call("do_notify_action"), nil).leaf = true
 	end
 end

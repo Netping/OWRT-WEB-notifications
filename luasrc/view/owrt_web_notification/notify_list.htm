@@ -28,51 +28,51 @@
 	local i = 1
 %>
 <div id="view">
-	<h2 name="content">Управление уведомлениями</h2>
-	<div class="cbi-map-descr">В данной таблице приведены настроенные уведомления. Здесь Вы можете добавить, настроить или удалить уведомления.</div>
+	<h2 name="content"><%:ntf_page_title%></h2>
+	<div class="cbi-map-descr"><%:ntf_page_description%></div>
 	<input type="button" class="cbi-button cbi-button-apply" style="margin-bottom: 1em;"
 		onclick="add_notify(this)"
-		value="Добавить уведомление"/>
+		value="<%:ntf_add_button%>"/>
 	<div class="table">
 		<div class="tr table-titles">
-			<div class="th" style="width: 100%;">Имя уведомления</div>
-			<div class="th">Сигнал</div>
-			<div class="th">Метод</div>
-			<div class="th">Состояние</div>
-			<div class="th">Управление</div>
+			<div class="th" style="width: 100%;"><%:ntf_th_name%></div>
+			<div class="th"><%:ntf_th_signal%></div>
+			<div class="th"><%:ntf_th_method%></div>
+			<div class="th"><%:ntf_th_state%></div>
+			<div class="th"><%:ntf_th_control%></div>
 		</div>
 		<% for k, v in util.kspairs(notifications) do %>
 			<div class="tr cbi-rowstyle-<%=i%>">
-				<div class="td" data-title="Имя уведомления" style="text-align: left;">
+				<div class="td" data-title="notify_name" style="text-align: left;">
 					<input type="text"
 						onchange="rename_notify(this)"
 						name="notify_name"
 						value="<%= notify(k):render('name') %>"
 						data-notify="<%=k%>"/>
 					<script type="text/javascript">L.require('menu-bootstrap')</script>
-					<div id="<%=k%>" class="cbi-tooltip error" style="display: none;">▲ Уведомление стаким именем уже существует!</div>
+					<div id="<%=k%>" class="cbi-tooltip error" style="display: none;"><%:ntf_name_validate%></div>
 				</div>
-				<div class="td" data-title="Сигнал">
+				<div class="td" data-title="notify_signal">
 					<%= notify(k):render("event") %>
 				</div>
-				<div class="td" data-title="Метод">
+				<div class="td" data-title="notify_method">
 					<%= notify(k):render("method") %>
 				</div>
-				<div class="td" data-title="Состояние">
+				<div class="td" data-title="notify_state">
 					<%= notify(k):render("state") %>
 				</div>
 				<div class="nowrap cbi-section-actions td">
 					<input type="button" class="cbi-button cbi-button-apply" onclick="switch_notify(this)"
-						value="Вкл/Выкл"
+						value="<%:ntf_switch_button%>"
 						data-notify="<%=k%>" 
 						style="display: initial;" />
 					<input type="button" class="cbi-button cbi-button-apply" onclick="edit_notify(this)"
-						value="Настройки"
+						value="<%:ntf_settings_button%>"
 						data-action="edit"
 						data-notify="<%=k%>" 
 						style="display: initial;" />
 					<input type="button" class="cbi-button cbi-button-reset" onclick="delete_notify(this)"
-						value="Удалить"
+						value="<%:ntf_delete_button%>"
 						data-notify="<%=k%>"
 						style="display: initial;" />
 				</div>

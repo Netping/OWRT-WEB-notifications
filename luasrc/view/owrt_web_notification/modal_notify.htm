@@ -2,7 +2,7 @@
 	local config = "notifyconf"
 	local uci = require "luci.model.uci".cursor()
 	local util = require "luci.util"
-	local log = require "luci.model.netping.log"
+	local log = require "luci.model.owrt_web_notification.log"
 	local globals = uci:get_all(config, "globals")
 %>
 <%

@@ -1,7 +1,7 @@
 local fs = require "nixio.fs"
 local uci = require "luci.model.uci".cursor()
 local util = require "luci.util"
-local log = require "luci.model.netping.log"
+local log = require "luci.model.owrt_web_notification.log"
 ---------------------------------------------------------
 --------- Change these when create new notify ----------
 local notify_config = "notifyconf"

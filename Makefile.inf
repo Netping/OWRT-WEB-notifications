@@ -1,27 +1,47 @@
 SECTION="NetPing modules"
 CATEGORY="Base"
-TITLE="EPIC OWRT-WEB-Notifications"
+TITLE="EPIC OWRT_WEB_notifications"
 
-PKG_NAME="OWRT-WEB-Notifications"
+PKG_NAME="OWRT_WEB_notifications"
 PKG_VERSION=0.1
 PKG_RELEASE=1
-PKG_DEPENDS=OWRT-digital-outs
+PKG_DEPENDS=OWRT_notifications
 
-MODULE_NAME=owrt_web_notification
-MODULE_FILES_DIR=/usr/lib/lua/luci/
-STATIC_FILES_DIR=/www/luci-static/resources/
+MODULE_NAME = owrt_web_notification
+MODULE_FILES = luasrc/*
+MODULE_FILES_DIR ?= /usr/lib/lua/luci/
+STATIC_FILES = htdocs/luci-static/resources/*
+STATIC_FILES_DIR ?= /www/luci-static/resources/
+
+INSTALL_DIR =
 
 .PHONY: all install
 
 all: install
 
-install:
+build:
+	@echo "Nothing to do"
 
-	cp -r luasrc/* $(MODULE_FILES_DIR)
-	cp -r htdocs/luci-static/resources/* $(STATIC_FILES_DIR)
+configure:
+	@echo "Nothing to do"
+
+install:
+ifeq ($(origin INSTALL_DIR),command line)
+	for dir in $(MODULE_FILES_DIR) $(STATIC_FILES_DIR); do mkdir -p $(INSTALL_DIR)$${dir}; done
+endif
+	cp -r $(MODULE_FILES) $(INSTALL_DIR)$(MODULE_FILES_DIR)
+	cp -r $(STATIC_FILES) $(INSTALL_DIR)$(STATIC_FILES_DIR)
 
 clean:
-
+ifeq ($(INSTALL_DIR),command line)
+	rm -r $(INSTALL_DIR)$(MODULE_FILES_DIR)controller/$(MODULE_NAME)
+	rm -r $(INSTALL_DIR)$(MODULE_FILES_DIR)model/$(MODULE_NAME)
+	rm -r $(INSTALL_DIR)$(MODULE_FILES_DIR)model/cbi/$(MODULE_NAME)
+	rm -r $(INSTALL_DIR)$(MODULE_FILES_DIR)view/$(MODULE_NAME)
+	rm $(INSTALL_DIR)$(MODULE_FILES_DIR)i18n/$(MODULE_NAME).*.lmo
+	rm -r $(INSTALL_DIR)$(STATIC_FILES_DIR)$(MODULE_NAME)
+else
+endif
 	rm -r $(MODULE_FILES_DIR)controller/$(MODULE_NAME)
 	rm -r $(MODULE_FILES_DIR)model/$(MODULE_NAME)
 	rm -r $(MODULE_FILES_DIR)model/cbi/$(MODULE_NAME)

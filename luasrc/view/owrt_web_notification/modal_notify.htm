@@ -2,7 +2,7 @@
 	local config = "notifyconf"
 	local uci = require "luci.model.uci".cursor()
 	local util = require "luci.util"
-	local log = require "luci.model.owrt_web_notification.log"
+	-- local log = require "luci.model.owrt_web_notification.log"
 	local globals = uci:get_all(config, "globals")
 %>
 <%
@@ -59,6 +59,9 @@ function getDates(startDate, stopDate) {
 	return dateArray;
 }
 function hmsToHours(str) {
+	if (str == undefined) {
+		str = '00:00:00';
+	}
 	var p = str.split(':'), s = 0, m = 1;
 	var factor = 0.25;
 	var sliderHours = 0;
@@ -251,7 +254,6 @@ function edit_notify(btn) {
 					var group = document.querySelector(".protected-time .protected-time-panes"),
 						menu = document.querySelector(".protected-time .cbi-tabmenu");
 						if(!menu || !group) {
-							console.log("ADD 1")
 							// ui.tabs.renderTab(tab_title);
 							ui.tabs.createTab(tab_title)
 							// window.EventBus.renderTab(interval)
@@ -260,7 +262,6 @@ function edit_notify(btn) {
 						var tab_to_show = group.querySelector("[data-tab='" + slug(tab_title) + "'");
 						var menu_to_show = menu.querySelector("[data-tab='" + slug(tab_title) + "'");
 						// var everyPeriod_to_show = tab_to_show.querySelector("[name='repeat_mode_" + slug(tab_title) + "']")
-						// console.log("everyPeriod_to_show ", everyPeriod_to_show)
 					if(tab_to_show && menu_to_show) {
 						tab_to_show.style.display = "block"
 						menu_to_show.style.display = "block"
@@ -276,7 +277,6 @@ function edit_notify(btn) {
 
 						// window.EventBus.timeframe[slug(tab_title)]["enabled"] = true
 					} else {
-						console.log("ADD 2")
 						ui.tabs.createTab(tab_title)
 						// ui.tabs.renderTab(tab_title);
 						return;
@@ -460,7 +460,6 @@ EveryPeriod["make"] = function(initVal=[], tabid="") {
 	_everyPeriod_widget.addEventListener("mouseup", function(ev) {
 		var inp = ev.path[0].hasAttribute("value") ? ev.path[0] : ev.path[1].firstChild || undefined
 		if(!inp) {
-			console.log("Input Radio is not found in 'EveryPeriod' widget!")
 			return;
 		}
 		var current = (inp) ? inp.value : undefined
@@ -546,7 +545,6 @@ DatePicker["reset"] = function(tabid) {
 }
 
 window.EventBus.node.addEventListener('time-slider-changed', function(ev) { 
-		console.log("::::::::: time-slider-changed")
 		window.EventBus.node.dispatchEvent(new CustomEvent("bus-time-slider-changed", {}));
 	})
 
@@ -701,7 +699,6 @@ function makeSliderWidget(tab_idref, tab_title, initVal=[]) {
 								notify_data["name"] = name.getValue()
 								notify_data["method"] = method.getValue()
 								notify_data["event"] = signal.getValue()
-								console.log(notify_dates)
 								//notify_data["timetable"] = signal.getValue()
 								notify_data = Object.assign(notify_data, ntf_data[method.getValue()]);
 								return handleEdit(notify_id, notify_data, globals_data, ntf_data);

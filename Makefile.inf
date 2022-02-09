@@ -4,7 +4,7 @@ TITLE="OWRT-WEB-notifications"
 
 PKG_NAME="OWRT-WEB-notifications"
 PKG_VERSION=0.1
-PKG_RELEASE=1
+PKG_RELEASE=2
 PKG_DEPENDS=OWRT-notifications
 
 MODULE_NAME = owrt_web_notification

@@ -16,13 +16,10 @@ function updateDropdownLabel(dom_selector=".protected-time .cbi-dropdown") {
 //var EventBus_widget = window.EventBus.render()
 
 //var interval_loader = {}
-//console.log(this.EventBus);
 //var tf = window.EventBus.timeframe
 //for(tab in tf) {
-//	console.log(tab);
 //	interval_loader[tf[tab].title] = tf[tab].title
 //}
-//console.log(interval_loader);
 
 var protected_intervals = new ui.Dropdown(Object.values(interval_loader), interval_loader, { 
 	multiple: true, 
@@ -175,7 +172,6 @@ EveryPeriod["make"] = function(initVal=[], tabid="") {
 	_everyPeriod_widget.addEventListener("mouseup", function(ev) {
 		var inp = ev.path[0].hasAttribute("value") ? ev.path[0] : ev.path[1].firstChild || undefined
 		if(!inp) {
-			console.log("Input Radio is not found in 'EveryPeriod' widget!")
 			return;
 		}
 		var current = (inp) ? inp.value : undefined
@@ -262,7 +258,6 @@ DatePicker["reset"] = function(tabid) {
 }
 
 window.EventBus.node.addEventListener('time-slider-changed', function(ev) { 
-		console.log("::::::::: time-slider-changed")
 		window.EventBus.node.dispatchEvent(new CustomEvent("bus-time-slider-changed", {}));
 	})
 

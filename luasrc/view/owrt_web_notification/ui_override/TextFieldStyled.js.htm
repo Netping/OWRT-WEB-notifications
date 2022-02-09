@@ -28,7 +28,6 @@ L.require("dom").then(function(dom)	{
 							'title': _('Reveal/hide password'),
 							'aria-label': _('Reveal/hide password'),
 							'click': function(ev) {
-								console.log("MMM")
 								var e = this.previousElementSibling;
 								e.type = (e.type === 'password') ? 'text' : 'password';
 								ev.preventDefault();

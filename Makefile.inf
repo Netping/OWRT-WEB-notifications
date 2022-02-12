@@ -15,11 +15,14 @@ STATIC_FILES_DIR ?= /www/luci-static/resources/
 
 INSTALL_DIR =
 
-.PHONY: all install
+all: build preinstall install configure
 
-all: configure build install
+ipk: build install
 
 build:
+	@echo "Nothing to do"
+
+preinstall:
 	@echo "Nothing to do"
 
 configure:

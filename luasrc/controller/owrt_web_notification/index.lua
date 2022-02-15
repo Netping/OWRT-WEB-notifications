@@ -44,6 +44,10 @@ function do_notify_action(action, notify_id)
 		delete = function(notify_id, ...)
 			notify(notify_id):delete()
 		end,
+		switch = function(notify_id, ...)
+			local curstate = notify(notify_id):get("state")
+			notify(notify_id):set("state", tostring(math.abs(tonumber(curstate) - 1)))
+		end,
 		edit = function(notify_id, payloads)
 			-- apply notify settings
 			-- local allowed_notify_options = util.keys(uci:get_all(config, "prototype_" .. string.lower(payloads["notify_data"].method)))

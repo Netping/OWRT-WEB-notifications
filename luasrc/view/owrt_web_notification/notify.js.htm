@@ -18,12 +18,12 @@ function delete_notify(btn) {
 	send_action(action, notify_id, payload);
 }
 
-/*function switch_relay(btn) {
+function switch_notify(btn) {
 	var action = "switch",
-		relay_id = btn.getAttribute("data-relay"),
-		payload = {"relay_data": {}, "globals_data": {}, "adapter_data": {}};
-	send_action(action, relay_id, payload);
-}*/
+		notify_id = btn.getAttribute("data-notify"),
+		payload = {"notify_data": {}, "globals_data": {}, "adapter_data": {}};
+	send_action(action, notify_id, payload);
+}
 
 function rename_notify(inp) {
 	var action = "rename",

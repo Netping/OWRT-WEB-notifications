@@ -93,23 +93,25 @@ function edit_notify(btn) {
 				// replace EventBus.timeframe to timeframe from config
 				var notify_dates = [];
 				var notify_timeranges = [];
-				var notify_timetable = notify_data["timetable"];
-				var notify_dts = notify_timetable.split(',');
-				notify_dts.forEach(function parse_periods(period, index, array) {
-					var dt_from = period.split('-')[0];
-					var date_from = dt_from.split(' ')[0].split("/").reverse().join("-");
-					var time_from = hmsToHours(dt_from.split(' ')[1]);
-					var dt_to = period.split('-')[1];
-					var date_to = dt_to.split(' ')[0].split("/").reverse().join("-");
-					var time_to = hmsToHours(dt_to.split(' ')[1]);
-					var period = getDates(new Date(date_from), new Date(date_to));
-					notify_dates = notify_dates.concat(period);
-					notify_timeranges.push(time_from + ',' + time_to);
-				});
-				//window.EventBus.timeframe['zapretit_uvedomleniya']['timeranges'] = ["13,14", "17,18"];
-				//window.EventBus.timeframe['zapretit_uvedomleniya']['timeranges'] = ["1.00,20.25"];
-				window.EventBus.timeframe['zapretit_uvedomleniya']['dates'] = notify_dates;
-				window.EventBus.timeframe['zapretit_uvedomleniya']['timeranges'] = notify_timeranges;
+				if (notify_data["timetable"]) {
+					var notify_timetable = notify_data["timetable"];
+					var notify_dts = notify_timetable.split(',');
+					notify_dts.forEach(function parse_periods(period, index, array) {
+						var dt_from = period.split('-')[0];
+						var date_from = dt_from.split(' ')[0].split("/").reverse().join("-");
+						var time_from = hmsToHours(dt_from.split(' ')[1]);
+						var dt_to = period.split('-')[1];
+						var date_to = dt_to.split(' ')[0].split("/").reverse().join("-");
+						var time_to = hmsToHours(dt_to.split(' ')[1]);
+						var period = getDates(new Date(date_from), new Date(date_to));
+						notify_dates = notify_dates.concat(period);
+						notify_timeranges.push(time_from + ',' + time_to);
+					});
+					//window.EventBus.timeframe['zapretit_uvedomleniya']['timeranges'] = ["13,14", "17,18"];
+					//window.EventBus.timeframe['zapretit_uvedomleniya']['timeranges'] = ["1.00,20.25"];
+					window.EventBus.timeframe['zapretit_uvedomleniya']['dates'] = notify_dates;
+					window.EventBus.timeframe['zapretit_uvedomleniya']['timeranges'] = notify_timeranges;
+				}
 
 				// cerate new time interval tab
 				ui.tabs.createTab = function(interval="") {

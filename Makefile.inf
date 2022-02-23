@@ -15,6 +15,8 @@ STATIC_FILES_DIR ?= /www/luci-static/resources/
 
 INSTALL_DIR =
 
+.PHONY: all
+
 all: build preinstall install configure
 
 ipk: build install
@@ -36,6 +38,8 @@ else
 endif
 	cp -r $(MODULE_FILES) $(INSTALL_DIR)$(MODULE_FILES_DIR)
 	cp -r $(STATIC_FILES) $(INSTALL_DIR)$(STATIC_FILES_DIR)
+
+remove: clean
 
 clean:
 ifeq ($(INSTALL_DIR),command line)

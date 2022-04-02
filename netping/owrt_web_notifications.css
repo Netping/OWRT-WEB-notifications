@@ -1,5 +1,5 @@
 table.notify-header {
-    width: 700px;
+    width: 690px;
     border: 0px double black;
     margin-left: 0px;
     padding: 0;
@@ -32,6 +32,7 @@ table tr td {
 
 table.notify-header tr td {
     border: 0px double black;
+    font-weight: bold;
     margin-left: 0px;
     padding: 0;
     text-align: center;
@@ -175,6 +176,18 @@ font-size: 13px;
 line-height: normal;
 border: 1px solid #ccc;
 padding: 5px 14px 6px 14px;
+}
+
+input.delete_button {
+width: 100%;
+display: inline-block;
+background: linear-gradient(#fff,#fff 25%,#e6e6e6) no-repeat;
+text-shadow: 0 1px 1px rgba(255,255,255,0.75);
+font-size: 13px;
+line-height: normal;
+border: 1px solid #c44;
+padding: 5px 14px 6px 14px;
+color: #c44;
 }
 
 div.cbi-section-error {

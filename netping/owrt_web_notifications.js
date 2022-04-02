@@ -1,13 +1,25 @@
-function settings_click(object) {
+function settings_click_old(settings_id) {
 button_settings = document.getElementsByClassName('settings_button');
 var i = 0; var button_number = 0;
 for (let element of button_settings)  {	i++; if (object==element) button_number = i;    } 
 settings_notification(button_number);
 }
 
-function settings_notification(button_number) {
+function check_click(notify_name) {
+XHR.post('/cgi-bin/luci/admin/system/notification/check', { id: notify_name }, function(x) { console.log(x); location.reload(); });
+}
+
+function add_click() {
+XHR.post('/cgi-bin/luci/admin/system/notification/add', { }, function(x) { console.log(x); location.reload(); });
+}
+
+function delete_click(delete_id) {
+if (confirm (question_delete)) { XHR.post('/cgi-bin/luci/admin/system/notification/delete', { id: delete_id }, function(x) { console.log(x); location.reload(); }); }
+}
+
+function settings_click(notify_id) {
 document.getElementById('div_gray_background').style.display="block";
-XHR.post('/cgi-bin/luci/admin/system/notification-settings', { button : button_number }, function(x) {
+XHR.post('/cgi-bin/luci/admin/system/notification/settings', { id : notify_id }, function(x) {
 var data_array = x.responseText.split("\n");
 document.getElementById('notify_edit_id').value = data_array[0];
 document.getElementById('notify_edit_name').value = data_array[1];
@@ -37,10 +49,10 @@ notify_sendto = document.getElementById('notify_edit_sendto').value; if_error = 
 set_begins = []; set_ends = [];
 date_begin_elements = document.getElementsByClassName('date_begin'); i = 0; for (let element of date_begin_elements)  { set_begins[i] =  element.value; if_error = (set_begins[i].length > 0) ? if_error : if_error + 1; i++; }
 date_end_elements = document.getElementsByClassName('date_end'); i = 0; for (let element of date_end_elements)  { set_ends[i] =  element.value; if_error = (set_ends[i].length > 0) ? if_error : if_error + 1; i++; }
+date_string = Date_to_string (set_begins, set_ends); if_error = (date_string.trim().length > 10)? if_error : if_error + 1;
 
 if (if_error > 0) { alert("One or more field is empty. Please try after edit this."); return; }
-date_string = Date_to_string (set_begins, set_ends);
-XHR.post('/cgi-bin/luci/admin/system/notification-settings-commit', { id : notify_id, name: notify_name, event: notify_event, method: notify_method, expression: notify_expression, text: notify_text, sendto: notify_sendto, timetable: date_string }, function(x) { console.log(x); location.reload(); });
+XHR.post('/cgi-bin/luci/admin/system/notification/settings-commit', { id : notify_id, name: notify_name, event: notify_event, method: notify_method, expression: notify_expression, text: notify_text, sendto: notify_sendto, timetable: date_string }, function(x) { console.log(x); location.reload(); });
 }
 
 function Date_to_string (set_begins, set_ends) {

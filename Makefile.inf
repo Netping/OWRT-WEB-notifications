@@ -38,5 +38,5 @@ remove: clean
 
 clean:
 	rm -r $(INSTALL_DIR)$(MODULE_FILES_DIR)controller/$(MODULE_NAME)
-	rm -r $(INSTALL_DIR)$(MODULE_FILES_DIR)model/cbi/$(MODULE_NAME)
+	rm -r $(INSTALL_DIR)$(MODULE_FILES_DIR)view/$(MODULE_NAME)
 	rm -r $(INSTALL_DIR)$(STATIC_FILES_DIR)$(MODULE_NAME)s.*

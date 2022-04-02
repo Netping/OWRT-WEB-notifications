@@ -3,9 +3,9 @@ CATEGORY="Base"
 TITLE="OWRT-WEB-notifications"
 
 PKG_NAME="OWRT-WEB-notifications"
-PKG_VERSION=0.2
-PKG_RELEASE=5
-PKG_DEPENDS=OWRT-notifications
+PKG_VERSION=0.1
+PKG_RELEASE=6
+PKG_DEPENDS=OWRT-notifications luci-base luci-compat
 
 MODULE_NAME = owrt_web_notification
 MODULE_FILES = luasrc/*

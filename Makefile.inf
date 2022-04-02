@@ -31,7 +31,7 @@ configure:
 	@echo "Nothing to do"
 
 install:
-ifneq ($(INSTALL_DIR))
+ifneq ($(INSTALL_DIR),)
 	mkdir -p $(INSTALL_DIR)$(MODULE_FILES_DIR)
 	mkdir -p $(INSTALL_DIR)$(STATIC_FILES_DIR)
 else

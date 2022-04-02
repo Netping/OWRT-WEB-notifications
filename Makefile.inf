@@ -4,7 +4,7 @@ TITLE="OWRT-WEB-notifications"
 
 PKG_NAME="OWRT-WEB-notifications"
 PKG_VERSION=0.1
-PKG_RELEASE=6
+PKG_RELEASE=7
 PKG_DEPENDS=OWRT-notifications luci-base luci-compat
 
 MODULE_NAME = owrt_web_notification
@@ -31,6 +31,13 @@ configure:
 	@echo "Nothing to do"
 
 install:
+	ifneq ($(INSTALL_DIR))
+	mkdir -p $(INSTALL_DIR)$(MODULE_FILES_DIR)
+	mkdir -p $(INSTALL_DIR)$(STATIC_FILES_DIR)
+else
+	mkdir -p $(MODULE_FILES_DIR)
+	mkdir -p $(STATIC_FILES_DIR)
+endif
 	cp -r $(MODULE_FILES) $(INSTALL_DIR)$(MODULE_FILES_DIR)
 	cp -r $(STATIC_FILES) $(INSTALL_DIR)$(STATIC_FILES_DIR)
 

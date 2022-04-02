@@ -1,0 +1,67 @@
+<%+header%>
+<link rel="stylesheet" href="/luci-static/netping/owrt_web_notifications.css">
+<script src="/luci-static/netping/owrt_web_notifications.js"></script>
+<script>
+var question_delete = "<%:Delete this item?%>";
+</script>
+<table class='notify-header'><tr><td width=60px><%:On/Off%></td><td width=390px><%:Notification name%></td><td width=110px><%:Signal%></td><td width=130px><%:Method%></td></tr></table>
+<%
+local config, title = "notifyconf", "Notifications"
+
+
+cours = luci.model.uci.cursor()
+event_list=cours:get_list(config, "globals", "event")
+method_list=cours:get_list(config, "globals", "method")
+
+
+cours:foreach(config, "notify", function(s)
+if s[".name"] == 'prototype' then return end %>
+
+<table class='notify-body'><tr>
+<td width=60px>
+<input type='checkbox' <%=((s.state)=='1' and 'checked' or '')%> value='1' id='<%=s[".name"]%>' name='<%=s[".name"]%>' onclick="check_click('<%=s[".name"]%>')"; />
+</td>
+<td width=390px><%=s.name%></td>
+<td width=110px><%=s.event%></td>
+<td width=130px><%=s.method%></td>
+<td width=90px><input type='button' onclick='settings_click("<%=s[".name"]%>");' value='<%:Settings%>' class='settings_button'></td><td width=10px></td><td><input type='button' onclick='delete_click("<%=s[".name"]%>");' value='<%:Delete%>' class='delete_button'></td></tr>
+</table>
+
+<%  end) %>
+<p><table class='notify-header'><tr><td width=70px><input type='button' onclick='add_click();' value='<%:Add%>' class='delete_button'></td><td></td></tr></table></p>
+<%
+event_list_html =""
+for i=1,#event_list do
+event_list[i] = luci.util.split(event_list[i], ".", 1)[1]
+event_list_html = event_list_html.."<option value='"..event_list[i].."'>"..event_list[i].."</option>"
+end
+
+method_list_html =""
+for i=1,#method_list do
+method_list[i] = luci.util.split(method_list[i], ".", 1)[1]
+method_list_html = method_list_html.."<option value='"..method_list[i].."'>"..method_list[i].."</option>"
+end
+%>
+
+<div id='div_gray_background' class='gray_background'><div id='div_settings_window' class='settings_window'>
+<h3>Edit notification</h3><input id='notify_edit_id' type='hidden' /><table class='notify_edit'>
+<tr><td width=300px><%:Notification name%></td><td><input class='notify_edit' id='notify_edit_name' type='text' /></td></tr>
+<tr><td><%:Event%></td><td><select class='notify_edit' id='notify_edit_event' type='Value' /><%=event_list_html%></select></td></tr>
+<tr><td><%:Method%></td><td><select class='notify_edit' id='notify_edit_method' type='Value' /><%=method_list_html%></select></td></tr>
+<tr><td><%:Expression%></td><td><input class='notify_edit' id='notify_edit_expression' type='text' /></td></tr>
+<tr><td><%:Notification text%></td><td><input class='notify_edit' id='notify_edit_text' type='text' /></td></tr>
+<tr><td><%:Send to%></td><td><input class='notify_edit' id='notify_edit_sendto' type='text' /></td></tr>
+<input class='notify_edit' id='notify_edit_timetable' type='hidden' />
+</table><br>
+<div id='time_intervals' class='time_intervals'></div>
+<div class='div_attention'><%:Please specify the time intervals for allow notifications to be sent%>
+<p></p><input class='cbi-button' type='button' value='<%:Save%>' onClick='save_settings();' />&nbsp;<input class='cbi-button' type='button' value='<%:Cancel%>' onClick='location.reload();' />&nbsp;<input class='cbi-button' type='button' value='<%:Add time interval%>' onClick='new_date_fields();' />
+</div>
+</div></div>
+
+<script>
+document.getElementById('indicators').innerHTML ="<span data-indicator='poll-status' data-clickable='true' data-style='active'><%:Refreshing%></span>"; 
+var notify_mtime='<%=nixio.fs.stat("/etc/config/notifyconf").mtime%>';
+refreshing_xhr = XHR.poll(5, '/cgi-bin/luci/admin/system/notification/refresh', {}, function(x) { if (notify_mtime != x.responseText) { location.reload(); }}); 
+</script>
+<%+footer%>
